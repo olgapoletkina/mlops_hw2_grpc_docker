@@ -229,3 +229,67 @@ grpcurl -plaintext \
     - Контейнеризация сервиса
     - Локальный тест сервер + клиент
 
+
+
+---
+
+## **Скрины**
+
+### 1. Структура проекта
+
+![Структура проекта](imgs/structure.png)
+
+### 2. Проверка Docker
+
+![Docker Version](imgs/version.png)
+
+```bash
+docker --version
+```
+### 3. Сборка Docker-образа
+
+![Docker Build](imgs/build.png)
+
+```bash
+docker build -t grpc-ml-service .
+```
+### 4. Проверка созданного образа
+
+![Docker Images](imgs/images.png)
+
+```bash
+docker images | Select-String grpc-ml-service
+```
+### 5. Запуск контейнера
+
+```bash
+docker run -p 50051:50051 grpc-ml-service
+```
+
+### 6. Проверка запущенных контейнеров
+
+![Docker PS](imgs/ps.png)
+
+```bash
+docker ps
+```
+
+### 7. Тестирование через Python-клиент
+
+![Client Test](imgs/client.png)
+
+```bash
+cd ml_grpc_service
+python -m client.client
+```
+
+**Результат:**
+```
+Health: status=ok, version=v1.0.0
+Predict: prediction=0.398335838823814, confidence=1.0000, version=v1.0.0
+```
+
+### 8. Проверка внутри контейнера (Docker Desktop)
+
+![Docker Exec](imgs/doc_exec.png)
+
